@@ -1,0 +1,149 @@
+{
+  "name": "letusc",
+  "displayName": "LetUsC",
+  "description": "Cool shortcuts for C++ programmers",
+  "version": "0.0.1",
+  "author": {
+    "name": "Madhu Nair"},
+  "publisher": "gteras",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "icon": "logo.png",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "onLanguage:objective-c",
+    "onLanguage:objective-cpp",
+    "onDidChangeActiveTextEditor",
+    "onDidChangeTextEditorSelection",
+    "onDidChangeTextDocument",
+    "onDidChangeConfiguration"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "letusc.toggleLinesHide",
+        "title": "Short Lines"
+      },
+      {
+        "command": "letusc.toggleLineHide",
+        "title": "Short line"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "letusc.toggleLinesHide",
+          "when": "editorLangId == cpp || editorLangId == c || editorLangId == csharp",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "LetusC Configuration",
+      "properties": {
+        "letusc.regexPatterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "description": "Regular expression to match lines to be shortened."
+              },
+              "patternStart": {
+                "type": "string",
+                "description": "The string indicating the start of a line to be shortened."
+              }
+            },
+            "required": [
+              "pattern",
+              "patternStart"
+            ]
+          },
+          "default": [
+            {
+              "pattern": "^\\s*\\/\\/.*",
+              "patternStart": "//"
+            }
+          ],
+          "description": "List of objects containing regex patterns to match lines and their corresponding start strings"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "c",
+        "aliases": [
+          "C",
+          "c"
+        ],
+        "extensions": [
+          ".c",
+          ".h"
+        ]
+      },
+      {
+        "id": "cpp",
+        "aliases": [
+          "C++",
+          "cpp"
+        ],
+        "extensions": [
+          ".cpp",
+          ".hpp",
+          ".h"
+        ]
+      },
+      {
+        "id": "objective-c",
+        "aliases": [
+          "Objective-C",
+          "objective-c"
+        ],
+        "extensions": [
+          ".m",
+          ".h"
+        ]
+      },
+      {
+        "id": "objective-cpp",
+        "aliases": [
+          "Objective-C++",
+          "objective-cpp"
+        ],
+        "extensions": [
+          ".mm",
+          ".h"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "chai": "^5.1.1",
+    "eslint": "^8.57.0",
+    "mocha": "^10.4.0",
+    "typescript": "^5.4.5"
+  }
+}
