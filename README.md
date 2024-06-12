@@ -19,6 +19,10 @@ A Visual Studio Code extension to help C++ programmers.
 
 To toggle hide lines, use the command `Toggle Hide Lines` available in the Command Palette (`Ctrl+Shift+P`).
 
+You can also toggle the hide lines through the key binding "`Ctrl+`". Or from the status bar lock icon.
+
+When this option is active / enabled you are not allowed to edit the current active document.
+
 ## Configuration
 
 The extension can be configured with custom regex patterns in the `settings.json` file.
@@ -30,7 +34,7 @@ The extension can be configured with custom regex patterns in the `settings.json
         "patternStart": "//"
     },
     {
-        "pattern": "^#.",
-        "patternStart": "#"
+        "pattern": "^\\s*LOG",
+        "patternStart": "LOG"
     }
 ]
