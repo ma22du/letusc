@@ -89,7 +89,7 @@ export function activate(context: vscode.ExtensionContext) {
                         vscode.commands.executeCommand('default:type', args);
                     } else {
                         // Prevent other keys
-                        vscode.window.showInformationMessage('Editing is disabled');
+                        vscode.window.showInformationMessage('ReadOnly Mode : Ctrl+` to Edit');
                     }
                 } else {
                     // Allow all keys when editing is enabled

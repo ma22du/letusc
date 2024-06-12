@@ -36,7 +36,7 @@ The extension can be configured with custom regex patterns in the `settings.json
         "patternStart": "//"
     },
     {
-        "pattern": "^\\s*LOG",
+        "pattern": "^\\s*LOG/.*",
         "patternStart": "LOG"
     }
 ]
