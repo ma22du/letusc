@@ -19,7 +19,9 @@ A Visual Studio Code extension to help C++ programmers.
 
 To toggle hide lines, use the command `Toggle Hide Lines` available in the Command Palette (`Ctrl+Shift+P`).
 
-You can also toggle the hide lines through the key binding "`Ctrl+`". Or from the status bar lock icon.
+You can also toggle the hide lines through the key binding **_Ctrl+`_**
+
+ Or from the status bar lock icon.
 
 When this option is active / enabled you are not allowed to edit the current active document.
 
