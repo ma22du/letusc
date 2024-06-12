@@ -7,9 +7,17 @@
     "name": "Madhu Nair"},
   "publisher": "gteras",
   "engines": {
-    "vscode": "^1.60.0"
+    "vscode": "^1.80.0"
   },
   "icon": "logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ma22du/letusc"
+  },
+  "bugs": {
+      "url": "https://github.com/ma22du/letusc/issues"
+  },
+  "homepage": "https://github.com/ma22du/letusc#readme",
   "categories": [
     "Other"
   ],
@@ -28,22 +36,28 @@
     "commands": [
       {
         "command": "letusc.toggleLinesHide",
-        "title": "Short Lines"
+        "title": "Short Lines",
+        "icon":{
+          "dark": "resources/dark/eye-white.svg",
+          "light": "resources/light/eye.svg"
+        }
       },
       {
         "command": "letusc.toggleLineHide",
         "title": "Short line"
       }
     ],
-    "menus": {
-      "editor/title": [
-        {
+    "keybindings": [
+      {
           "command": "letusc.toggleLinesHide",
-          "when": "editorLangId == cpp || editorLangId == c || editorLangId == csharp",
-          "group": "navigation"
-        }
-      ]
-    },
+          "key": "ctrl+`",
+          "when": "editorTextFocus"
+      },
+      {
+          "command": "type",
+          "when": "editorTextFocus"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "LetusC Configuration",
@@ -136,7 +150,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
-    "@types/vscode": "^1.60.0",
+    "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "@vscode/test-cli": "^0.0.9",

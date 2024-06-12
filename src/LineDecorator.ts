@@ -10,8 +10,10 @@ export class LineDecorator {
     private expandedDecorationType: vscode.TextEditorDecorationType;
     private expandedLines: Set<number> = new Set();
     private enabled: boolean = true;
+    private toggleStatusBarCallback: (enabled: boolean) => void;
 
-    constructor() {
+    constructor(toggleStatusBarCallback: (enabled: boolean) => void) {
+        this.toggleStatusBarCallback = toggleStatusBarCallback;
         // Decoration type for hidden comments
         this.hiddenDecorationType = vscode.window.createTextEditorDecorationType({
             after: {
@@ -48,7 +50,7 @@ export class LineDecorator {
         return this.enabled;
     }
 
-    public decorate(editor: vscode.TextEditor) {
+    public decorate(editor: vscode.TextEditor,line: number = -1) {
         if (!this.enabled) {
             this.clearDecorations(editor);
             return;
@@ -56,11 +58,17 @@ export class LineDecorator {
 
         const patterns = this.getRegExPatterns();
         console.log('Loaded regex patterns:', patterns); // Log loaded patterns
-        const text = editor.document.getText();
+        
         const hiddenDecorations: vscode.DecorationOptions[] = [];
         const expandedDecorations: vscode.DecorationOptions[] = [];
-
-        const lines = text.split('\n');
+        let lines = [];
+        if (line !== -1){
+            lines.push(editor.document.lineAt(line).text);           
+        }
+        else{
+            const text = editor.document.getText();
+            lines = text.split('\n');
+        }
         for (let i = 0; i < lines.length; i++) {
             const line = lines[i];
             for (const { pattern: pattern, patternStart: patLocStart } of patterns) {
@@ -111,6 +119,7 @@ export class LineDecorator {
 
     public toggleEnabled() {
         this.enabled = !this.enabled;
+        this.toggleStatusBarCallback(this.enabled);  // Toggle the status bar item
         const editor = vscode.window.activeTextEditor;
         if (editor) {
             this.decorate(editor);

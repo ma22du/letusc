@@ -7,9 +7,12 @@ suite('LineDecorator Test Suite', () => {
 
     let lineDecorator: LineDecorator;
     let mockEditor: vscode.TextEditor;
+    let mockStatusBarItem: vscode.StatusBarItem;
 
     setup(() => {
-        lineDecorator = new LineDecorator();
+        lineDecorator = new LineDecorator((enabled: boolean) => {
+            mockStatusBarItem.text = enabled ? '$(eye) Toggle Comments' : '$(eye-closed) Toggle Comments';
+        });
 
         // Mock TextEditor
         mockEditor = {
